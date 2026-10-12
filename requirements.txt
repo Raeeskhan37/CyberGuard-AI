@@ -1,0 +1,13 @@
+streamlit==1.42.0
+
+crewai==0.102.0
+
+crewai-tools==0.32.0
+
+python-dotenv==1.0.1
+
+bandit==1.7.10
+
+pip-audit==2.7.3
+
+reportlab==4.2.5
