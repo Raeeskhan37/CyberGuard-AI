@@ -76,22 +76,24 @@ def main():
     st.sidebar.markdown("**AI-Powered Cybersecurity Assistant**")
     st.sidebar.markdown("---")
     
-    # API Key Configuration
-    env_groq_key = os.getenv("GROQ_API_KEY", "")
-    env_groq_model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    # API Key Configuration (Securely loaded from Streamlit Secrets or environment)
+    env_groq_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY", ""))
+    env_groq_model = st.secrets.get("GROQ_MODEL", os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"))
     
-    groq_api_key = st.sidebar.text_input(
-        "Groq API Key", 
-        value=env_groq_key if env_groq_key else "", 
-        type="password",
-        help="Required for 3-agent CrewAI analysis. Scanners function fully without this key."
-    )
+    # Use the secret directly without exposing an input box or eye icon to users
+    groq_api_key = env_groq_key
     
+    if groq_api_key:
+        st.sidebar.success("🔒 AI Engine Active (Key Secured)")
+    else:
+        st.sidebar.warning("⚠️ Running in Static Mode (No AI Key configured)")
+        
     groq_model = st.sidebar.selectbox(
         "Groq Model",
         ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "openai/gpt-oss-120b"],
         index=0,
         help="Select verified Groq model for agent orchestration."
+    )
     )
     
     st.sidebar.markdown("---")
