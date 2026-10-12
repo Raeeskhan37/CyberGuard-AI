@@ -94,7 +94,6 @@ def main():
         index=0,
         help="Select verified Groq model for agent orchestration."
     )
-    )
     
     st.sidebar.markdown("---")
     st.sidebar.markdown("### ℹ️ About")
